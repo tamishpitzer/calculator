@@ -1,0 +1,16 @@
+package com.example.parser;
+
+import com.example.store.VariableStore;
+
+public class LiteralNode extends ASTNode {
+    private final long value;
+
+    public LiteralNode(long value) {
+        this.value = value;
+    }
+
+    @Override
+    public long evaluate(VariableStore store) throws EvaluatorException {
+        return value;
+    }
+}
