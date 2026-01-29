@@ -2,7 +2,7 @@
 calculator/target/
 
 # VS Code
-.vscode/
+calculator/.vscode/
 
 # Logs
 **/logs/

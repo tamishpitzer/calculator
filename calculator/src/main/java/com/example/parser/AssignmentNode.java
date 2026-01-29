@@ -28,28 +28,17 @@ public class AssignmentNode extends ASTNode {
             currentVal = 0L;
         }
 
-        long result;
-        switch (assignmentOp) {
-            case PLUS_ASSIGN:
-                result = currentVal + rightVal;
-                break;
-            case MINUS_ASSIGN:
-                result = currentVal - rightVal;
-                break;
-            case MULTIPLY_ASSIGN:
-                result = currentVal * rightVal;
-                break;
-            case DIVIDE_ASSIGN:
-                if (rightVal == 0) {
-                    throw new EvaluatorException("Division by zero");
-                }
-                result = currentVal / rightVal;
-                break;
-            default:
-                throw new EvaluatorException("Unknown assignment operator: " + assignmentOp);
+        TokenType.BinaryOp op = assignmentOp.getOperation();
+        if (op == null) {
+            throw new EvaluatorException("Unknown assignment operator: " + assignmentOp);
         }
 
-        store.set(variableName, result);
-        return result;
+        try {
+            long result = op.apply(currentVal, rightVal);
+            store.set(variableName, result);
+            return result;
+        } catch (RuntimeException e) {
+            throw new EvaluatorException(e.getMessage());
+        }
     }
 }

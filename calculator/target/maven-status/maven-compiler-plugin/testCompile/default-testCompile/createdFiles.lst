@@ -1,0 +1,5 @@
+com/example/store/VariableStoreTest.class
+com/example/lexer/LexerTest.class
+com/example/IntegrationTest.class
+com/example/parser/ParserTest.class
+com/example/evaluator/EvaluatorTest.class

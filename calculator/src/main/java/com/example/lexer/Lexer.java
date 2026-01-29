@@ -45,38 +45,10 @@ public class Lexer {
     }
 
     private Token createToken(String match) throws LexerException {
-        if (match.matches("\\d+")) {
-            return new Token(TokenType.NUMBER, match);
-        } else if (match.matches("[a-zA-Z_]\\w*")) {
-            return new Token(TokenType.IDENTIFIER, match);
-        } else if (match.equals("++")) {
-            return new Token(TokenType.INCREMENT, match);
-        } else if (match.equals("--")) {
-            return new Token(TokenType.DECREMENT, match);
-        } else if (match.equals("+=")) {
-            return new Token(TokenType.PLUS_ASSIGN, match);
-        } else if (match.equals("-=")) {
-            return new Token(TokenType.MINUS_ASSIGN, match);
-        } else if (match.equals("*=")) {
-            return new Token(TokenType.MULTIPLY_ASSIGN, match);
-        } else if (match.equals("/=")) {
-            return new Token(TokenType.DIVIDE_ASSIGN, match);
-        } else if (match.equals("+")) {
-            return new Token(TokenType.PLUS, match);
-        } else if (match.equals("-")) {
-            return new Token(TokenType.MINUS, match);
-        } else if (match.equals("*")) {
-            return new Token(TokenType.MULTIPLY, match);
-        } else if (match.equals("/")) {
-            return new Token(TokenType.DIVIDE, match);
-        } else if (match.equals("(")) {
-            return new Token(TokenType.LEFT_PAREN, match);
-        } else if (match.equals(")")) {
-            return new Token(TokenType.RIGHT_PAREN, match);
-        } else if (match.equals("=")) {
-            return new Token(TokenType.ASSIGN, match);
+        TokenType type = TokenType.fromString(match);
+        if (type != null) {
+            return new Token(type, match);
         }
-
         throw new LexerException("Unrecognized token: " + match);
     }
 

@@ -63,7 +63,6 @@ public class Parser {
     }
 
     private ASTNode parseUnary() throws ParserException {
-        // Prefix increment/decrement
         if (match(TokenType.INCREMENT, TokenType.DECREMENT)) {
             TokenType op = previous().getType();
             ASTNode operand = parseUnary();
@@ -76,7 +75,6 @@ public class Parser {
     private ASTNode parsePostfix() throws ParserException {
         ASTNode expr = parsePrimary();
 
-        // Postfix increment/decrement
         if (match(TokenType.INCREMENT, TokenType.DECREMENT)) {
             TokenType op = previous().getType();
             return new UnaryOpNode(op, expr, false);

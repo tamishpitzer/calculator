@@ -19,20 +19,14 @@ public class BinaryOpNode extends ASTNode {
         long leftVal = left.evaluate(store);
         long rightVal = right.evaluate(store);
 
-        switch (operator) {
-            case PLUS:
-                return leftVal + rightVal;
-            case MINUS:
-                return leftVal - rightVal;
-            case MULTIPLY:
-                return leftVal * rightVal;
-            case DIVIDE:
-                if (rightVal == 0) {
-                    throw new EvaluatorException("Division by zero");
-                }
-                return leftVal / rightVal;
-            default:
-                throw new EvaluatorException("Unknown binary operator: " + operator);
+        TokenType.BinaryOp op = operator.getOperation();
+        if (op == null) {
+            throw new EvaluatorException("Unknown binary operator: " + operator);
+        }
+        try {
+            return op.apply(leftVal, rightVal);
+        } catch (RuntimeException e) {
+            throw new EvaluatorException(e.getMessage());
         }
     }
 }
