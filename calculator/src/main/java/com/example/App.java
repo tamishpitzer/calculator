@@ -4,22 +4,7 @@ import java.util.Scanner;
 
 import com.example.evaluator.Evaluator;
 
-/**
- * Text-based Calculator Application
- * 
- * Evaluates assignment expressions with operators:
- * - Arithmetic: +, -, *, /
- * - Assignment: =, +=, -=, *=, /=
- * - Increment/Decrement: ++, --
- * 
- * Example:
- *   i = 0
- *   j = ++i
- *   x = i++ + 5
- *   y = (5 + 3) * 10
- *   i += y
- * Output: (i=82,j=1,x=6,y=80)
- */
+
 public class App {
     public static void main(String[] args) {
         Evaluator evaluator = new Evaluator();

@@ -5,9 +5,6 @@ import org.junit.Test;
 
 import com.example.lexer.Lexer;
 
-/**
- * Tests for Parser class - Expression parsing layer
- */
 public class ParserTest {
 
     @Test

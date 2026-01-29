@@ -165,8 +165,7 @@ Result: (i=82,j=1,x=6,y=80)
 
 - **Lexer Tests** (4): Number tokenization, identifiers, operators, parentheses
 - **Parser Tests** (4): Literals, variables, binary ops, assignments
-- **Evaluator Tests** (8): Simple assignments, increment variants, arithmetic, operator precedence
-- **Integration Tests** (6): Complete expression sequences, complex nested expressions, edge cases
+- **Evaluator Tests** (14): Complete expression sequences, complex nested expressions, edge cases
 - **VariableStore Tests** (1): State management and output formatting
 
 Run tests with:
@@ -206,23 +205,6 @@ Error: Division by zero
 Error: Undefined variable: z
 Error: Assignment target must be a variable
 ```
-
-## Limitations & Future Enhancements
-
-### Current Limitations
-- Integer arithmetic only (no floating point)
-- Single-line expressions only
-- Limited error context
-
-### Possible Enhancements
-1. **More Operators**: Bitwise (&, |, ^), modulo (%), exponentiation (**)
-2. **Functions**: Custom function definitions and calls
-3. **Arrays/Collections**: Support for array indexing and operations
-4. **Floating Point**: Support for decimal numbers
-5. **Line:Column Error Reporting**: More precise error locations
-6. **Comments**: Support for single-line (//) and multi-line (/* */) comments
-7. **Conditional Expressions**: Ternary operator (? :)
-8. **Type System**: Type checking and declarations
 
 ## Code Quality
 

@@ -4,9 +4,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Tests for VariableStore class - State management layer
- */
 public class VariableStoreTest {
     private VariableStore store;
 

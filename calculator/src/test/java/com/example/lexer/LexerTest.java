@@ -5,9 +5,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-/**
- * Tests for Lexer class - Tokenization layer
- */
 public class LexerTest {
 
     @Test

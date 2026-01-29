@@ -15,8 +15,8 @@ public class AssignmentNode extends ASTNode {
     }
 
     @Override
-    public long evaluate(VariableStore store) throws EvaluatorException {
-        long rightVal = value.evaluate(store);
+    public Long evaluate(VariableStore store) throws EvaluatorException {
+        Long rightVal = value.evaluate(store);
 
         if (assignmentOp == TokenType.ASSIGN) {
             store.set(variableName, rightVal);
@@ -28,17 +28,13 @@ public class AssignmentNode extends ASTNode {
             currentVal = 0L;
         }
 
-        TokenType.BinaryOp op = assignmentOp.getOperation();
+        Operator op = Operator.from(assignmentOp);
         if (op == null) {
             throw new EvaluatorException("Unknown assignment operator: " + assignmentOp);
         }
 
-        try {
-            long result = op.apply(currentVal, rightVal);
-            store.set(variableName, result);
-            return result;
-        } catch (RuntimeException e) {
-            throw new EvaluatorException(e.getMessage());
-        }
+        long result = op.apply(currentVal, rightVal);
+        store.set(variableName, result);
+        return result;
     }
 }

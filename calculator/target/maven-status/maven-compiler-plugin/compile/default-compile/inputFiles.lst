@@ -1,6 +1,7 @@
 /Users/moriashpitzer/Documents/Taboola/Taboola-calculator/calculator/src/main/java/com/example/lexer/Lexer.java
 /Users/moriashpitzer/Documents/Taboola/Taboola-calculator/calculator/src/main/java/com/example/lexer/Token.java
 /Users/moriashpitzer/Documents/Taboola/Taboola-calculator/calculator/src/main/java/com/example/App.java
+/Users/moriashpitzer/Documents/Taboola/Taboola-calculator/calculator/src/main/java/com/example/parser/Operator.java
 /Users/moriashpitzer/Documents/Taboola/Taboola-calculator/calculator/src/main/java/com/example/parser/LiteralNode.java
 /Users/moriashpitzer/Documents/Taboola/Taboola-calculator/calculator/src/main/java/com/example/parser/VariableNode.java
 /Users/moriashpitzer/Documents/Taboola/Taboola-calculator/calculator/src/main/java/com/example/store/VariableStore.java

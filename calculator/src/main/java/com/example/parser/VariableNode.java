@@ -14,7 +14,7 @@ public class VariableNode extends ASTNode {
     }
 
     @Override
-    public long evaluate(VariableStore store) throws EvaluatorException {
+    public Long evaluate(VariableStore store) throws EvaluatorException {
         Long value = store.get(name);
         if (value == null) {
             throw new EvaluatorException("Undefined variable: " + name);

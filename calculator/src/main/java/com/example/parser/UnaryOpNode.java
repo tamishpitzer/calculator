@@ -15,7 +15,7 @@ public class UnaryOpNode extends ASTNode {
     }
 
     @Override
-    public long evaluate(VariableStore store) throws EvaluatorException {
+    public Long evaluate(VariableStore store) throws EvaluatorException {
         if (!(operand instanceof VariableNode)) {
             throw new EvaluatorException("Increment/Decrement can only be applied to variables");
         }

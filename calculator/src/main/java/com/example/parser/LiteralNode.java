@@ -10,7 +10,7 @@ public class LiteralNode extends ASTNode {
     }
 
     @Override
-    public long evaluate(VariableStore store) throws EvaluatorException {
+    public Long evaluate(VariableStore store) throws EvaluatorException {
         return value;
     }
 }
