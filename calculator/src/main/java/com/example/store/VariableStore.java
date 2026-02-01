@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class VariableStore {
     private final Map<String, Long> variables;
 
@@ -17,14 +20,6 @@ public class VariableStore {
 
     public Long get(String name) {
         return variables.get(name);
-    }
-
-    public Map<String, Long> getAll() {
-        return new TreeMap<>(variables);
-    }
-
-    public void clear() {
-        variables.clear();
     }
 
     @Override

@@ -1,19 +1,19 @@
 package com.example.store;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class VariableStoreTest {
+class VariableStoreTest {
     private VariableStore store;
 
-    @Before
-    public void setUp() {
+    @BeforeEach 
+    void setUp() {
         store = new VariableStore();
     }
 
     @Test
-    public void testVariableStore() {
+    void testVariableStore() {
         store.set("x", 10);
         store.set("y", 20);
 
@@ -23,7 +23,7 @@ public class VariableStoreTest {
     }
 
     @Test
-    public void testSubtraction() throws Exception {
+    void testSubtraction() throws Exception {
         store.set("a", 10);
         long result = store.get("a") - 3;
         store.set("b", result);
@@ -32,7 +32,7 @@ public class VariableStoreTest {
     }
 
     @Test
-    public void testMinusAssign() throws Exception {
+    void testMinusAssign() throws Exception {
         store.set("x", 20);
         long newVal = store.get("x") - 5;
         store.set("x", newVal);
@@ -41,7 +41,7 @@ public class VariableStoreTest {
     }
 
     @Test
-    public void testMultiplyAssign() throws Exception {
+    void testMultiplyAssign() throws Exception {
         store.set("x", 4);
         long newVal = store.get("x") * 3;
         store.set("x", newVal);
@@ -50,7 +50,7 @@ public class VariableStoreTest {
     }
 
     @Test
-    public void testDivideAssign() throws Exception {
+    void testDivideAssign() throws Exception {
         store.set("x", 20);
         long newVal = store.get("x") / 4;
         store.set("x", newVal);
@@ -59,7 +59,7 @@ public class VariableStoreTest {
     }
 
     @Test
-    public void testUninitializedVariable() throws Exception {
+    void testUninitializedVariable() throws Exception {
         Long val = store.get("x");
         if (val == null) {
             val = 0L;

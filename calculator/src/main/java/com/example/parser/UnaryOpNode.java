@@ -3,7 +3,7 @@ package com.example.parser;
 import com.example.lexer.TokenType;
 import com.example.store.VariableStore;
 
-public class UnaryOpNode extends ASTNode {
+public class UnaryOpNode implements ASTNode {
     private final TokenType operator;      
     private final ASTNode operand;
     private final boolean isPrefix;

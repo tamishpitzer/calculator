@@ -1,25 +1,24 @@
 package com.example.evaluator;
 
-import static org.junit.Assert.assertEquals;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-public class EvaluatorTest {
-    private Evaluator evaluator;
+@SpringBootTest
+class EvaluatorTest {
 
-    @Before
-    public void setUp() {
-        evaluator = new Evaluator();
-    }
+    @Autowired
+    Evaluator evaluator;
 
     @Test
-    public void testSimpleAssignment() throws Exception {
+    void testSimpleAssignment() throws Exception {
         evaluator.evaluateExpression("i = 0");
         assertEquals(0L, (long) evaluator.getVariableStore().get("i"));
     }
 
     @Test
-    public void testPrefixIncrement() throws Exception {
+    void testPrefixIncrement() throws Exception {
         evaluator.evaluateExpression("i = 0");
         evaluator.evaluateExpression("j = ++i");
 
@@ -28,7 +27,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testPostfixIncrement() throws Exception {
+    void testPostfixIncrement() throws Exception {
         evaluator.evaluateExpression("i = 5");
         evaluator.evaluateExpression("j = i++");
 
@@ -37,7 +36,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testArithmetic() throws Exception {
+    void testAddition() throws Exception {
         evaluator.evaluateExpression("a = 10");
         evaluator.evaluateExpression("b = a + 5");
 
@@ -46,13 +45,13 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testOperatorPrecedence() throws Exception {
+    void testOperatorPrecedence() throws Exception {
         evaluator.evaluateExpression("y = (5 + 3) * 10");
         assertEquals(80L, (long) evaluator.getVariableStore().get("y"));
     }
 
     @Test
-    public void testCompoundAssignment() throws Exception {
+    void testAdditionAssignment() throws Exception {
         evaluator.evaluateExpression("i = 10");
         evaluator.evaluateExpression("i += 5");
 
@@ -60,7 +59,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testMultiplication() throws Exception {
+    void testMultiplication() throws Exception {
         evaluator.evaluateExpression("a = 3");
         evaluator.evaluateExpression("b = a * 4");
 
@@ -68,7 +67,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testDivision() throws Exception {
+    void testDivision() throws Exception {
         evaluator.evaluateExpression("a = 20");
         evaluator.evaluateExpression("b = a / 4");
 
@@ -76,7 +75,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testExampleFromRequirements() throws Exception {
+    void testMultipleOperations() throws Exception {
         evaluator.evaluateExpression("i = 0");
         evaluator.evaluateExpression("j = ++i");
         evaluator.evaluateExpression("x = i++ + 5");
@@ -90,7 +89,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testComplexExpression() throws Exception {
+    void testComplexExpression() throws Exception {
         evaluator.evaluateExpression("a = 2");
         evaluator.evaluateExpression("b = 3");
         evaluator.evaluateExpression("c = a + b * 2");
@@ -101,7 +100,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testPrefixDecrement() throws Exception {
+    void testPrefixDecrement() throws Exception {
         evaluator.evaluateExpression("x = 10");
         evaluator.evaluateExpression("y = --x");
 
@@ -110,7 +109,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testPostfixDecrement() throws Exception {
+    void testPostfixDecrement() throws Exception {
         evaluator.evaluateExpression("x = 10");
         evaluator.evaluateExpression("y = x--");
 
@@ -119,7 +118,7 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testParenthesesPrecedence() throws Exception {
+    void testParenthesesPrecedence() throws Exception {
         evaluator.evaluateExpression("a = 2 + 3 * 4");
         evaluator.evaluateExpression("b = (2 + 3) * 4");
 
@@ -128,10 +127,9 @@ public class EvaluatorTest {
     }
 
     @Test
-    public void testNestedParentheses() throws Exception {
+    void testNestedParentheses() throws Exception {
         evaluator.evaluateExpression("a = ((2 + 3) * (4 - 1))");
 
         assertEquals(15L, (long) evaluator.getVariableStore().get("a"));
     }
 }
-

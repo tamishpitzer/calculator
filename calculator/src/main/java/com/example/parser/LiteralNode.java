@@ -2,7 +2,7 @@ package com.example.parser;
 
 import com.example.store.VariableStore;
 
-public class LiteralNode extends ASTNode {
+public class LiteralNode implements ASTNode {
     private final long value;
 
     public LiteralNode(long value) {

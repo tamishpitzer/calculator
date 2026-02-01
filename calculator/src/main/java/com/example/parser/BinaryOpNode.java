@@ -3,7 +3,7 @@ package com.example.parser;
 import com.example.lexer.TokenType;
 import com.example.store.VariableStore;
 
-public class BinaryOpNode extends ASTNode {
+public class BinaryOpNode implements ASTNode {
     private final ASTNode left;
     private final TokenType operator;
     private final ASTNode right;
@@ -19,10 +19,8 @@ public class BinaryOpNode extends ASTNode {
         long leftVal = left.evaluate(store);
         long rightVal = right.evaluate(store);
 
-        Operator op = Operator.from(operator);
-        if (op == null) {
-            throw new Exception("Unknown binary operator: " + operator);
-        }
-        return op.apply(leftVal, rightVal);
+        return Operator.from(operator)
+                       .orElseThrow(() -> new Exception("Unknown binary operator: " + operator))
+                       .apply(leftVal, rightVal);
     }
 }

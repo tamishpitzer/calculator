@@ -2,6 +2,7 @@ package com.example.parser;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import com.example.lexer.TokenType;
 
@@ -39,9 +40,10 @@ public enum Operator {
         this.operation = operation;
     }
 
-    public static Operator from(TokenType type) {
-        return TOKEN_TO_OP.get(type);
+    public static Optional<Operator> from(TokenType type) {
+        return Optional.ofNullable(TOKEN_TO_OP.get(type));
     }
+
 
     public long apply(long left, long right) {
         return operation.apply(left, right);

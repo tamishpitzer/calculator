@@ -2,7 +2,9 @@ package com.example;
 
 import java.util.Scanner;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 import com.example.evaluator.Evaluator;
 
@@ -10,7 +12,10 @@ import com.example.evaluator.Evaluator;
 @SpringBootApplication
 public class App {
     public static void main(String[] args) {
-        Evaluator evaluator = new Evaluator();
+        
+        ApplicationContext context = SpringApplication.run(App.class, args);
+
+        Evaluator evaluator = context.getBean(Evaluator.class);
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Text-based Calculator. Enter expressions (Ctrl+D or Ctrl+Z to finish):");

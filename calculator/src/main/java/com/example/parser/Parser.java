@@ -2,9 +2,12 @@ package com.example.parser;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.lexer.Token;
 import com.example.lexer.TokenType;
 
+@Service
 public class Parser {
     private final List<Token> tokens;
     private int current;
@@ -15,6 +18,7 @@ public class Parser {
     }
 
     public ASTNode parse() throws Exception {
+
         ASTNode expr = parseAssignment();
         if (!isAtEnd()) {
             throw new Exception("Unexpected token after expression: " + peek().getValue());
@@ -133,7 +137,7 @@ public class Parser {
     }
 
     private boolean isAtEnd() {
-        return peek().getType() == TokenType.EOF;
+        return tokens.size() == current;
     }
 
     private Token peek() {

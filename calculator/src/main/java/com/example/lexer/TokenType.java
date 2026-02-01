@@ -1,5 +1,7 @@
 package com.example.lexer;
 
+import java.util.Arrays;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 public enum TokenType {
@@ -17,9 +19,8 @@ public enum TokenType {
     INCREMENT("\\+\\+"),
     DECREMENT("\\-\\-"),
     LEFT_PAREN("\\("),
-    RIGHT_PAREN("\\)"),
-    EOF("");
-
+    RIGHT_PAREN("\\)");
+    
     private final Pattern compiledPattern;
 
     TokenType(String regex) {
@@ -31,14 +32,9 @@ public enum TokenType {
         return compiledPattern != null && compiledPattern.matcher(str).matches();
     }
 
-    //return optional tokentype
-    public static TokenType fromString(String match) {
-        for (TokenType type : TokenType.values()) {
-            if (type.matches(match)) {
-                return type;
-            }
-        }
-        return null;
-        //return Option.empty();
+    public static Optional<TokenType> fromString(String match) {
+        return Arrays.stream(TokenType.values())
+            .filter(type -> type.matches(match))
+            .findFirst();
     }
 }

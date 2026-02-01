@@ -3,9 +3,9 @@ package com.example.parser;
 import com.example.lexer.TokenType;
 import com.example.store.VariableStore;
 
-public class AssignmentNode extends ASTNode {
+public class AssignmentNode implements ASTNode {
     private final String variableName;
-    private final TokenType assignmentOp;  // ASSIGN, PLUS_ASSIGN, MINUS_ASSIGN, etc.
+    private final TokenType assignmentOp;
     private final ASTNode value;
 
     public AssignmentNode(String variableName, TokenType assignmentOp, ASTNode value) {
@@ -28,12 +28,10 @@ public class AssignmentNode extends ASTNode {
             currentVal = 0L;
         }
 
-        Operator op = Operator.from(assignmentOp);
-        if (op == null) {
-            throw new Exception("Unknown assignment operator: " + assignmentOp);
-        }
+        long result = Operator.from(assignmentOp)
+                .orElseThrow(() -> new Exception("Unknown assignment operator: " + assignmentOp))
+                .apply(currentVal, rightVal);
 
-        long result = op.apply(currentVal, rightVal);
         store.set(variableName, result);
         return result;
     }

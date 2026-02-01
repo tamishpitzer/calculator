@@ -44,10 +44,9 @@ Final state: `(i=82,j=1,x=6,y=80)`
 src/main/java/com/example/
 ├── App.java                    # Application entry point
 ├── lexer/                      # Tokenization layer
-│   ├── Lexer.java             # Regex-based tokenizer
 │   ├── Token.java             # Token representation
 │   └── TokenType.java         # Token type enumeration
-├── parser/                     # Expression parsing layer
+├── parser/                    # Expression parsing layer
 │   ├── Parser.java            # Recursive descent parser
 │   ├── ASTNode.java           # Base AST node class
 │   ├── LiteralNode.java       # Numeric literal
@@ -55,10 +54,12 @@ src/main/java/com/example/
 │   ├── BinaryOpNode.java      # Binary operations (+, -, *, /)
 │   ├── UnaryOpNode.java       # Unary operations (++, --)
 │   └── AssignmentNode.java    # Assignment operations (=, +=, etc.)
-├── evaluator/                  # Evaluation orchestrator
+├── evaluator/                 # Evaluation orchestrator
 │   └── Evaluator.java         # Coordinates lexing, parsing, evaluation
-└── store/                      # Variable storage
-    └── VariableStore.java     # Variable state management
+├── store/                     # Variable storage
+│   └── VariableStore.java     # Variable state management
+├── util/                      # Tokenization layer
+│   └── LexerUtil.java         # Regex-based tokenizer
 ```
 
 ### Data Flow
@@ -66,7 +67,7 @@ src/main/java/com/example/
 ```
 Input Expression
        ↓
-   Lexer (Tokenization)
+   LexerUtil (Tokenization)
        ↓
    Parser (AST Building)
        ↓
@@ -79,11 +80,11 @@ Input Expression
 
 ## How It Works
 
-### 1. Lexer - Tokenization
+### 1. LexerUtil - Tokenization
 Converts input string into tokens using Regex patterns:
 ```
 Input: "x = 5 + 3"
-Output: [IDENTIFIER(x), ASSIGN(=), NUMBER(5), PLUS(+), NUMBER(3), EOF]
+Output: [IDENTIFIER(x), ASSIGN(=), NUMBER(5), PLUS(+), NUMBER(3)]
 ```
 
 ### 2. Parser - AST Building
@@ -163,7 +164,7 @@ Result: (i=82,j=1,x=6,y=80)
 
 **28 comprehensive unit tests** covering:
 
-- **Lexer Tests** (4): Number tokenization, identifiers, operators, parentheses
+- **LexerUtil Tests** (4): Number tokenization, identifiers, operators, parentheses
 - **Parser Tests** (4): Literals, variables, binary ops, assignments
 - **Evaluator Tests** (14): Complete expression sequences, complex nested expressions, edge cases
 - **VariableStore Tests** (1): State management and output formatting
@@ -205,6 +206,13 @@ Error: Division by zero
 Error: Undefined variable: z
 Error: Assignment target must be a variable
 ```
+
+### Possible Enhancements
+1. **More Operators**: Bitwise (&, |, ^), modulo (%), exponentiation (**)
+2. **Functions**: Custom function definitions and calls
+3. **Floating Point**: Support for decimal numbers
+4. **Line:Column Error Reporting**: More precise error locations
+5. **Comments**: Support for single-line (//) and multi-line (/* */) comments
 
 ## Code Quality
 
