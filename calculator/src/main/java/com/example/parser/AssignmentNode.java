@@ -15,7 +15,7 @@ public class AssignmentNode extends ASTNode {
     }
 
     @Override
-    public Long evaluate(VariableStore store) throws EvaluatorException {
+    public Long evaluate(VariableStore store) throws Exception {
         Long rightVal = value.evaluate(store);
 
         if (assignmentOp == TokenType.ASSIGN) {
@@ -30,7 +30,7 @@ public class AssignmentNode extends ASTNode {
 
         Operator op = Operator.from(assignmentOp);
         if (op == null) {
-            throw new EvaluatorException("Unknown assignment operator: " + assignmentOp);
+            throw new Exception("Unknown assignment operator: " + assignmentOp);
         }
 
         long result = op.apply(currentVal, rightVal);

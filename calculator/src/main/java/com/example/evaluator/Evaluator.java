@@ -3,21 +3,20 @@ package com.example.evaluator;
 import java.util.List;
 
 import com.example.lexer.Lexer;
-import com.example.lexer.Lexer.LexerException;
 import com.example.lexer.Token;
 import com.example.parser.ASTNode;
 import com.example.parser.Parser;
-import com.example.parser.Parser.ParserException;
 import com.example.store.VariableStore;
 
 public class Evaluator {
+    // add springboot and do @autowired and static
     private final VariableStore variableStore;
 
     public Evaluator() {
         this.variableStore = new VariableStore();
     }
 
-    public void evaluateExpression(String expression) throws LexerException, ParserException, ASTNode.EvaluatorException {
+    public void evaluateExpression(String expression) throws Exception{
         Lexer lexer = new Lexer(expression);
         List<Token> tokens = lexer.tokenize();
 
@@ -29,9 +28,5 @@ public class Evaluator {
 
     public VariableStore getVariableStore() {
         return variableStore;
-    }
-
-    public void reset() {
-        variableStore.clear();
     }
 }

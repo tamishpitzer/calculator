@@ -20,18 +20,7 @@ public enum Operator {
     }
 
     private final BinaryOp operation;
-
-    Operator(BinaryOp operation) {
-        this.operation = operation;
-    }
-
-    public long apply(long left, long right) {
-        return operation.apply(left, right);
-    }
-
-    // Single source of truth for all mappings
     private static final Map<TokenType, Operator> TOKEN_TO_OP = new HashMap<>();
-
     static {
         TOKEN_TO_OP.put(TokenType.PLUS, PLUS);
         TOKEN_TO_OP.put(TokenType.PLUS_ASSIGN, PLUS);
@@ -46,8 +35,16 @@ public enum Operator {
         TOKEN_TO_OP.put(TokenType.DIVIDE_ASSIGN, DIVIDE);
     }
 
+    Operator(BinaryOp operation) {
+        this.operation = operation;
+    }
+
     public static Operator from(TokenType type) {
         return TOKEN_TO_OP.get(type);
+    }
+
+    public long apply(long left, long right) {
+        return operation.apply(left, right);
     }
 }
 

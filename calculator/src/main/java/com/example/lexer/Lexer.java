@@ -9,11 +9,9 @@ public class Lexer {
     private static final Pattern TOKEN_PATTERN = Pattern.compile(
         "(\\d+)" +                    // Numbers
         "|([a-zA-Z_]\\w*)" +          // Identifiers
-        "|(\\+\\+|--)" +              // Pre/Post increment/decrement
+        "|(\\+\\+|--)" +              // increment/decrement
         "|(\\+=|-=|\\*=|/=)" +        // Compound assignments
-        "|(==)" +                     // Equality (for future use)
-        "|([+\\-*/()=])" +            // Single char operators
-        "|\\s+"                       // Whitespace (skip)
+        "|([+\\-*/()=])"              // Single char operators
     );
 
     private final String input;
@@ -22,17 +20,12 @@ public class Lexer {
         this.input = input;
     }
 
-    public List<Token> tokenize() throws LexerException {
+    public List<Token> tokenize() throws Exception {
         List<Token> tokens = new ArrayList<>();
         Matcher matcher = TOKEN_PATTERN.matcher(input);
 
         while (matcher.find()) {
             String match = matcher.group();
-
-            // Skip whitespace
-            if (match.matches("\\s+")) {
-                continue;
-            }
 
             Token token = createToken(match);
             if (token != null) {
@@ -44,17 +37,13 @@ public class Lexer {
         return tokens;
     }
 
-    private Token createToken(String match) throws LexerException {
+    private Token createToken(String match) throws Exception {
+              // TokenType type = TokenType.fromString(match).orElse(null);
+
         TokenType type = TokenType.fromString(match);
         if (type != null) {
             return new Token(type, match);
         }
-        throw new LexerException("Unrecognized token: " + match);
-    }
-
-    public static class LexerException extends Exception {
-        public LexerException(String message) {
-            super(message);
-        }
+        throw new Exception("Unrecognized token: " + match);
     }
 }

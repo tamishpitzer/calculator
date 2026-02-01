@@ -14,21 +14,21 @@ public class Parser {
         this.current = 0;
     }
 
-    public ASTNode parse() throws ParserException {
+    public ASTNode parse() throws Exception {
         ASTNode expr = parseAssignment();
         if (!isAtEnd()) {
-            throw new ParserException("Unexpected token after expression: " + peek().getValue());
+            throw new Exception("Unexpected token after expression: " + peek().getValue());
         }
         return expr;
     }
 
-    private ASTNode parseAssignment() throws ParserException {
+    private ASTNode parseAssignment() throws Exception {
         ASTNode expr = parseAdditive();
 
         if (matchAssignmentOp()) {
             TokenType op = previous().getType();
             if (!(expr instanceof VariableNode)) {
-                throw new ParserException("Assignment target must be a variable");
+                throw new Exception("Assignment target must be a variable");
             }
             ASTNode value = parseAssignment();
             VariableNode varNode = (VariableNode) expr;
@@ -38,7 +38,7 @@ public class Parser {
         return expr;
     }
 
-    private ASTNode parseAdditive() throws ParserException {
+    private ASTNode parseAdditive() throws Exception {
         ASTNode expr = parseMultiplicative();
 
         while (match(TokenType.PLUS, TokenType.MINUS)) {
@@ -50,7 +50,7 @@ public class Parser {
         return expr;
     }
 
-    private ASTNode parseMultiplicative() throws ParserException {
+    private ASTNode parseMultiplicative() throws Exception {
         ASTNode expr = parseUnary();
 
         while (match(TokenType.MULTIPLY, TokenType.DIVIDE)) {
@@ -62,17 +62,17 @@ public class Parser {
         return expr;
     }
 
-    private ASTNode parseUnary() throws ParserException {
+    private ASTNode parseUnary() throws Exception {
         if (match(TokenType.INCREMENT, TokenType.DECREMENT)) {
             TokenType op = previous().getType();
-            ASTNode operand = parseUnary();
+            ASTNode operand = parsePostfix();
             return new UnaryOpNode(op, operand, true);
         }
 
         return parsePostfix();
     }
 
-    private ASTNode parsePostfix() throws ParserException {
+    private ASTNode parsePostfix() throws Exception {
         ASTNode expr = parsePrimary();
 
         if (match(TokenType.INCREMENT, TokenType.DECREMENT)) {
@@ -83,7 +83,7 @@ public class Parser {
         return expr;
     }
 
-    private ASTNode parsePrimary() throws ParserException {
+    private ASTNode parsePrimary() throws Exception {
         if (match(TokenType.NUMBER)) {
             return new LiteralNode(Long.parseLong(previous().getValue()));
         }
@@ -95,12 +95,12 @@ public class Parser {
         if (match(TokenType.LEFT_PAREN)) {
             ASTNode expr = parseAssignment();
             if (!match(TokenType.RIGHT_PAREN)) {
-                throw new ParserException("Expected ')' after expression");
+                throw new Exception("Expected ')' after expression");
             }
             return expr;
         }
 
-        throw new ParserException("Unexpected token: " + peek().getValue());
+        throw new Exception("Unexpected token: " + peek().getValue());
     }
 
     private boolean match(TokenType... types) {
@@ -142,11 +142,5 @@ public class Parser {
 
     private Token previous() {
         return tokens.get(current - 1);
-    }
-
-    public static class ParserException extends Exception {
-        public ParserException(String message) {
-            super(message);
-        }
     }
 }

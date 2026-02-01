@@ -2,9 +2,12 @@ package com.example;
 
 import java.util.Scanner;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import com.example.evaluator.Evaluator;
 
 
+@SpringBootApplication
 public class App {
     public static void main(String[] args) {
         Evaluator evaluator = new Evaluator();

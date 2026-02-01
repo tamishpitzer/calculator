@@ -15,13 +15,13 @@ public class BinaryOpNode extends ASTNode {
     }
 
     @Override
-    public Long evaluate(VariableStore store) throws EvaluatorException {
+    public Long evaluate(VariableStore store) throws Exception {
         long leftVal = left.evaluate(store);
         long rightVal = right.evaluate(store);
 
         Operator op = Operator.from(operator);
         if (op == null) {
-            throw new EvaluatorException("Unknown binary operator: " + operator);
+            throw new Exception("Unknown binary operator: " + operator);
         }
         return op.apply(leftVal, rightVal);
     }

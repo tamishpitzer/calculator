@@ -15,7 +15,7 @@ public class EvaluatorTest {
     @Test
     public void testSimpleAssignment() throws Exception {
         evaluator.evaluateExpression("i = 0");
-        assertEquals(0.0, evaluator.getVariableStore().get("i"), 0.001);
+        assertEquals(0L, (long) evaluator.getVariableStore().get("i"));
     }
 
     @Test
@@ -23,8 +23,8 @@ public class EvaluatorTest {
         evaluator.evaluateExpression("i = 0");
         evaluator.evaluateExpression("j = ++i");
 
-        assertEquals(1.0, evaluator.getVariableStore().get("i"), 0.001);
-        assertEquals(1.0, evaluator.getVariableStore().get("j"), 0.001);
+        assertEquals(1L, (long) evaluator.getVariableStore().get("i"));
+        assertEquals(1L, (long) evaluator.getVariableStore().get("j"));
     }
 
     @Test
@@ -32,8 +32,8 @@ public class EvaluatorTest {
         evaluator.evaluateExpression("i = 5");
         evaluator.evaluateExpression("j = i++");
 
-        assertEquals(6.0, evaluator.getVariableStore().get("i"), 0.001);
-        assertEquals(5.0, evaluator.getVariableStore().get("j"), 0.001);
+        assertEquals(6L, (long) evaluator.getVariableStore().get("i"));
+        assertEquals(5L, (long) evaluator.getVariableStore().get("j"));
     }
 
     @Test
@@ -41,14 +41,14 @@ public class EvaluatorTest {
         evaluator.evaluateExpression("a = 10");
         evaluator.evaluateExpression("b = a + 5");
 
-        assertEquals(10.0, evaluator.getVariableStore().get("a"), 0.001);
-        assertEquals(15.0, evaluator.getVariableStore().get("b"), 0.001);
+        assertEquals(10L, (long) evaluator.getVariableStore().get("a"));
+        assertEquals(15L, (long) evaluator.getVariableStore().get("b"));
     }
 
     @Test
     public void testOperatorPrecedence() throws Exception {
         evaluator.evaluateExpression("y = (5 + 3) * 10");
-        assertEquals(80.0, evaluator.getVariableStore().get("y"), 0.001);
+        assertEquals(80L, (long) evaluator.getVariableStore().get("y"));
     }
 
     @Test
@@ -56,7 +56,7 @@ public class EvaluatorTest {
         evaluator.evaluateExpression("i = 10");
         evaluator.evaluateExpression("i += 5");
 
-        assertEquals(15.0, evaluator.getVariableStore().get("i"), 0.001);
+        assertEquals(15L, (long) evaluator.getVariableStore().get("i"));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class EvaluatorTest {
         evaluator.evaluateExpression("a = 3");
         evaluator.evaluateExpression("b = a * 4");
 
-        assertEquals(12.0, evaluator.getVariableStore().get("b"), 0.001);
+        assertEquals(12L, (long) evaluator.getVariableStore().get("b"));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class EvaluatorTest {
         evaluator.evaluateExpression("a = 20");
         evaluator.evaluateExpression("b = a / 4");
 
-        assertEquals(5.0, evaluator.getVariableStore().get("b"), 0.001);
+        assertEquals(5L, (long) evaluator.getVariableStore().get("b"));
     }
 
     @Test

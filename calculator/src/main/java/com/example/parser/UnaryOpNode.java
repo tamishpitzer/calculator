@@ -4,9 +4,9 @@ import com.example.lexer.TokenType;
 import com.example.store.VariableStore;
 
 public class UnaryOpNode extends ASTNode {
-    private final TokenType operator;      // INCREMENT or DECREMENT
+    private final TokenType operator;      
     private final ASTNode operand;
-    private final boolean isPrefix;        // true for ++i, false for i++
+    private final boolean isPrefix;
 
     public UnaryOpNode(TokenType operator, ASTNode operand, boolean isPrefix) {
         this.operator = operator;
@@ -15,9 +15,9 @@ public class UnaryOpNode extends ASTNode {
     }
 
     @Override
-    public Long evaluate(VariableStore store) throws EvaluatorException {
+    public Long evaluate(VariableStore store) throws Exception {
         if (!(operand instanceof VariableNode)) {
-            throw new EvaluatorException("Increment/Decrement can only be applied to variables");
+            throw new Exception("Increment/Decrement can only be applied to variables");
         }
 
         VariableNode varNode = (VariableNode) operand;

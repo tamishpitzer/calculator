@@ -31,6 +31,7 @@ public enum TokenType {
         return compiledPattern != null && compiledPattern.matcher(str).matches();
     }
 
+    //return optional tokentype
     public static TokenType fromString(String match) {
         for (TokenType type : TokenType.values()) {
             if (type.matches(match)) {
@@ -38,5 +39,6 @@ public enum TokenType {
             }
         }
         return null;
+        //return Option.empty();
     }
 }
